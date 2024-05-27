@@ -115,46 +115,42 @@ const Story: React.FC = () => {
         ))}
       </Box>
 
-      <Modal isOpen={isOpen} onClose={onClose} size="full">
-        <ModalOverlay />
-        <ModalContent bg="black">
-          <Flex>
-            <Avatar src={stories[currentStoryIndex].image[0]} />
-            <Heading color="white">{stories[currentStoryIndex].name}</Heading>
-          </Flex>
-          <ModalBody display="flex" alignItems="center" justifyContent="center">
-            <Box position="absolute" left="0" zIndex="1" cursor="pointer" p={2}>
-              <GrLinkPrevious
-                size="2em"
-                onClick={(e) => {
-                  prevImage();
-                }}
-              />
-            </Box>
-            {stories.length > 0 && (
+      {isOpen && stories.length > 0 && (
+        <Modal isOpen={isOpen} onClose={onClose} size="full">
+          <ModalOverlay />
+          <ModalContent bg="black">
+            <Flex alignItems="center" justifyContent="flex-start" gap='2' p={4}>
+              <Avatar src={stories[currentStoryIndex].image[0]} />
+              <Heading color="white" size="sm">
+                {stories[currentStoryIndex].name}
+              </Heading>
+            </Flex>
+            <ModalBody display="flex" alignItems="center" justifyContent="center">
+              <Box position="absolute" left="0" zIndex="1" cursor="pointer" p={2}>
+                <GrLinkPrevious
+                  size="2em"
+                  onClick={(e) => {
+                    prevImage();
+                  }}
+                />
+              </Box>
               <Image
                 src={stories[currentStoryIndex].image[currentImageIndex]}
                 maxH="100vh"
                 maxW="100vw"
               />
-            )}
-            <Box
-              position="absolute"
-              right="0"
-              zIndex="1"
-              cursor="pointer"
-              p={2}
-            >
-              <GrLinkNext
-                size="2em"
-                onClick={(e) => {
-                  nextImage();
-                }}
-              />
-            </Box>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+              <Box position="absolute" right="0" zIndex="1" cursor="pointer" p={2}>
+                <GrLinkNext
+                  size="2em"
+                  onClick={(e) => {
+                    nextImage();
+                  }}
+                />
+              </Box>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+      )}
     </>
   );
 };
